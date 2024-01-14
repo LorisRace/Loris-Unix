@@ -20,6 +20,10 @@ int semPost();
 
 int main()
 {
+  semAttente();
+  semEssaiAttente();
+  semPost();
+
   // Recuperation de l'identifiant de la file de messages
   fprintf(stderr,"(CONSULTATION %d) Recuperation de l'id de la file de messages\n",getpid());
 

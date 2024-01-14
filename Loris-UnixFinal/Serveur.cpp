@@ -58,21 +58,23 @@ int main()
   sigaction(SIGINT, &LLMC_INT, NULL);
 
   struct sigaction LLMC_CHLD;
-  LLMC_CHLD.sa_handler = HandlerSigint;
+  LLMC_CHLD.sa_handler = HandlerSigChld;
   sigemptyset(&LLMC_CHLD.sa_mask);
   LLMC_CHLD.sa_flags = 0;
-  sigaction(SIGINT, &LLMC_CHLD, NULL);
+  sigaction(SIGCHLD, &LLMC_CHLD, NULL);
 
   // Creation des ressources
   fprintf(stderr,"(SERVEUR %d) Creation de la file de messages\n",getpid());
-  if ((idQ = msgget(CLE,IPC_CREAT | IPC_EXCL | 0600)) == -1)  // CLE definie dans protocole.h
+  idQ = msgget(CLE,IPC_CREAT | IPC_EXCL | 0600);
+  if (idQ == -1)  
   {
-    perror("(SERVEUR) Erreur de msgget");
+    perror("(SERVEUR) Une erreur est survenue lors de la création de la file de messages");
     exit(1);
   }
 
   fprintf(stderr,"(SERVEUR %d) Creation de la sémaphore\n",getpid());
-  if (idSem = semget(CLE, 1, IPC_CREAT | IPC_EXCL | 0600) == -1)
+  idSem = semget(CLE, 1, IPC_CREAT | IPC_EXCL | 0600);
+  if (idSem == -1)
   {
     perror("(SERVEUR) Une erreur est survenue lors de la création de la sémaphore");
     exit(1);
@@ -80,7 +82,11 @@ int main()
   semctl(idSem, 0, SETVAL, 1);
 
   fprintf(stderr,"(SERVEUR %d) Creation de la mémoire partagée\n",getpid());
-  idShm = shmget(CLE, 200, IPC_CREAT | IPC_EXCL | 0600);
+  Id_Memoire_Partagee = shmget(CLE, 200, IPC_CREAT | IPC_EXCL | 0600);
+  if(Id_Memoire_Partagee == -1)
+  {
+    perror("(SERVEUR) Une erreur est survenue lors de la création de la mémoire partagée");
+  }
 
 
   connexion = mysql_init(NULL);
@@ -180,7 +186,7 @@ int main()
                       i = 0;
                       bool Connexion_Effectuee = false;
 
-                      while (Connexion_Effectuee = false && i < 6)
+                      while (Connexion_Effectuee == false && i < 6)
                       {
                         if (strcmp(tab->connexions[i].nom, m.data2) == 0)
                         {
@@ -613,14 +619,25 @@ void HandlerSigint(int sig)
 {
   (void)sig;
 
-  msgctl(idQ, IPC_RMID, NULL);
-  shmctl(Id_Memoire_Partagee, IPC_RMID, NULL);
-
+  if(msgctl(idQ, IPC_RMID, NULL) == -1)
+  {
+    perror("Erreur au niveau de la suppression de la file de messages (1)");
+    exit(1);
+  }
+  
   if(semctl(idSem, 0, IPC_RMID) == -1)
   {
     perror("Erreur au niveau de la suppression de la sémaphore (1)");
     exit(1);
+    
   }
+  
+  if(shmctl(Id_Memoire_Partagee, IPC_RMID, NULL) == -1)
+  {
+    perror("Erreur au niveau de la suppression de la mémoire partagée (1)");
+    exit(1);
+  }
+
   exit(0);
 }
 
