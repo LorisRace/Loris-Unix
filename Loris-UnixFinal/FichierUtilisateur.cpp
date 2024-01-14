@@ -121,7 +121,7 @@ int listeUtilisateurs(UTILISATEUR *vecteur) // le vecteur doit etre suffisamment
   
 }
 
-int ChangerMotDePasse(int Position, const char *MotDePasse2)
+void ChangerMotDePasse(int Position, const char *MotDePasse2)
 {
   UTILISATEUR Utilisateur;
 
@@ -129,7 +129,7 @@ int ChangerMotDePasse(int Position, const char *MotDePasse2)
 
   if ((Fichier = open(FICHIER_UTILISATEURS, O_RDWR) == -1)&& strcmp(MotDePasse2, "") == 0)
   {
-    return -1;
+    exit(1);
   }
 
   lseek (Fichier, (Position - 1) *sizeof(UTILISATEUR), SEEK_SET);
@@ -140,7 +140,7 @@ int ChangerMotDePasse(int Position, const char *MotDePasse2)
   {
     close(Fichier);
 
-    return -1;
+    exit(1);
   }
 
   close(Fichier);

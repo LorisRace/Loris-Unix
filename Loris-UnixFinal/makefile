@@ -1,4 +1,4 @@
-All:	Administrateur Client Serveur CreationBD BidonFichierPub Publicite Consultation Modification FichierUtilisateur.o
+All:	Administrateur Client CreationBD BidonFichierPub Publicite Consultation Modification FichierUtilisateur.o Serveur
 
 Administrateur:		mainAdmin.o windowadmin.o moc_windowadmin.o
 					g++  -o Administrateur mainAdmin.o windowadmin.o moc_windowadmin.o   /usr/lib64/libQt5Widgets.so /usr/lib64/libQt5Gui.so /usr/lib64/libQt5Core.so /usr/lib64/libGL.so -lpthread
@@ -33,7 +33,7 @@ moc_windowclient.o:			moc_windowclient.cpp
 							g++ -c -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -I../UNIX_DOSSIER_FINAL -I. -isystem /usr/include/qt5 -isystem /usr/include/qt5/QtWidgets -isystem /usr/include/qt5/QtGui -isystem /usr/include/qt5/QtCore -I. -I. -I/usr/lib64/qt5/mkspecs/linux-g++ -o moc_windowclient.o moc_windowclient.cpp
 
 Serveur:			Serveur.cpp
-					g++ Serveur.cpp -o Serveur -I/usr/include/mysql -m64 -L/usr/lib64/mysql -lmysqlclient -lpthread -lz -lm -lrt -lssl -lcrypto -ldl
+					g++ Serveur.cpp -o Serveur FichierUtilisateur.o -I/usr/include/mysql -m64 -L/usr/lib64/mysql -lmysqlclient -lpthread -lz -lm -lrt -lssl -lcrypto -ldl
 
 
 CreationBD:			CreationBD.cpp

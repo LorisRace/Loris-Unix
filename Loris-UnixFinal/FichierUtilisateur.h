@@ -1,7 +1,9 @@
 #ifndef FICHIER_UTILISATEUR_H
 #define FICHIER_UTILISATEUR_H
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+#include <iostream>
+#include <cstring>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -39,7 +41,7 @@ int listeUtilisateurs(UTILISATEUR *vecteur);
 //          -1 si le fichier n'existe pas
 
 
-int ChangerMotDePasse(int Position, const char *MotDePasse2);
+void ChangerMotDePasse(int Position, const char *MotDePasse2);
 //Cette fonction sert à changer de mot de passe
 //C'est en soi un update (Exemple : Mot de passe original : ABCD -> Mot de passe modifé : ACDE)
 
