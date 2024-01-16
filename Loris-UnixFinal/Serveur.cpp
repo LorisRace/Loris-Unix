@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <mysql.h>
 #include <setjmp.h>
+#include <fcntl.h>
 #include "protocole.h" // contient la cle et la structure d'un message
 #include "FichierUtilisateur.h"
 
@@ -233,6 +234,7 @@ int main()
                         reponse.type = m.expediteur;
                         reponse.expediteur = getpid();
                         reponse.requete = LOGIN;
+                        fprintf(stderr,"\nNouveau Connecte Cool\n");
                         msgsnd(idQ, &reponse, sizeof(MESSAGE) - sizeof(long), 0);
                         kill(m.expediteur, SIGUSR1);
                         
@@ -286,9 +288,11 @@ int main()
                         strcpy(reponse.data1, "OK");
                         strcpy(reponse.texte, "L'utilisateur est connecté");
                         reponse.type = m.expediteur;
+                        fprintf(stderr,"\nConnecte Cool\n");
                         reponse.expediteur = getpid();
-                        printf("Connecte Cool");
+                        fprintf(stderr,"\nConnecte Cool\n");
                         reponse.requete = LOGIN;
+                        fprintf(stderr,"\nConnecte Cool\n");
                         msgsnd(idQ, &reponse, sizeof(MESSAGE) - sizeof(long), 0);
                         kill(m.expediteur, SIGUSR1);
 
@@ -309,7 +313,7 @@ int main()
                             reponse.requete = ADD_USER;
                             strcpy(reponse.data1, m.data2);
                             msgsnd(idQ, &reponse, sizeof(MESSAGE) - sizeof(long), 0);
-                            kill(tab->connexions[j].pidFenetre, SIGUSR1);
+                            //kill(tab->connexions[j].pidFenetre, SIGUSR1);
 
                             reponse.type = m.expediteur;
                             strcpy(reponse.data1, tab->connexions[j].nom);
@@ -317,7 +321,7 @@ int main()
                           }
                         }
 
-                        kill(m.expediteur, SIGUSR1);
+                        //kill(m.expediteur, SIGUSR1);
                         break;
                       }
 
@@ -398,12 +402,12 @@ int main()
                               {
                                 if(tab->connexions[i].pidFenetre == m.expediteur)
                                 {
-                                  for(j = 0; j < 6; j++)
+                                  for(j = 0; j < 5; j++)
                                   {
                                     if(tab->connexions[i].autres[j] == 0)
                                     {
                                       tab->connexions[i].autres[j] = tab->connexions[k].pidFenetre;
-                                      j = 6;
+                                      j = 5;
                                     }
                                   }
                                 }
@@ -426,12 +430,12 @@ int main()
                                 {
                                   if(tab->connexions[i].pidFenetre = m.expediteur)
                                   {
-                                    for(j = 0; j < 6; j++)
+                                    for(j = 0; j < 5; j++)
                                     {
                                       if(tab->connexions[i].autres[j] == tab->connexions[k].pidFenetre)
                                       {
                                         tab->connexions[i].autres[j] = 0;
-                                        j = 6;
+                                        j = 5;
                                       }
                                     }
                                   }
@@ -452,7 +456,7 @@ int main()
                           i++;
                         }
 
-                        for(j = 0; j < 6; j++)
+                        for(j = 0; j < 5; j++)
                         {
                           if(tab->connexions[i].autres[j])
                           {

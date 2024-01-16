@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include "dialogmodification.h"
 #include <unistd.h>
+#include <fcntl.h>
 
 extern WindowClient *w;
 
@@ -19,7 +20,7 @@ extern WindowClient *w;
 int idQ, idShm;
 
 PUBLICITE *PubLLMC;
-#define TIME_OUT 120
+#define TIME_OUT 150
 int timeOut = TIME_OUT;
 
 void handlerSIGUSR1(int sig);
@@ -61,20 +62,20 @@ WindowClient::WindowClient(QWidget *parent):QMainWindow(parent),ui(new Ui::Windo
     // Armement des signaux
     struct sigaction User1;
     User1.sa_handler = handlerSIGUSR1;
-    sigemptyset(&User1.sa_mask);
     User1.sa_flags = 0;
+    sigemptyset(&User1.sa_mask);
     sigaction(SIGUSR1, &User1, NULL);
 
     struct sigaction User2;
     User2.sa_handler = HandlerSIGUSR2;
-    sigemptyset(&User2.sa_mask);
     User1.sa_flags = 0;
+    sigemptyset(&User2.sa_mask);
     sigaction(SIGUSR2, &User2, NULL);
 
     struct sigaction Alarm;
     Alarm.sa_handler = HandlerSIGALRM;
-    sigemptyset(&Alarm.sa_mask);
     Alarm.sa_flags = 0;
+    sigemptyset(&Alarm.sa_mask);
     sigaction(SIGALRM, &Alarm, NULL);
 
     // Envoi d'une requete de connexion au serveur
@@ -383,7 +384,7 @@ void WindowClient::dialogueErreur(const char* titre,const char* message)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void WindowClient::closeEvent(QCloseEvent *event)
 {
-    timeOut = 150;
+    timeOut = TIME_OUT;
     MESSAGE Deconnecte;
     Deconnecte.type = 1;
     Deconnecte.expediteur = getpid();
@@ -409,18 +410,22 @@ void WindowClient::closeEvent(QCloseEvent *event)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void WindowClient::on_pushButtonLogin_clicked()
 {
-    timeOut = 150;
+    timeOut = TIME_OUT;
 
     MESSAGE Utilisateur_Connecte;
-    Utilisateur_Connecte.type = 1;
-    Utilisateur_Connecte.expediteur = 1;
-    Utilisateur_Connecte.requete = LOGIN;
 
     sprintf(Utilisateur_Connecte.data1,"%d", isNouveauChecked());
     strcpy(Utilisateur_Connecte.data2, getNom());
     strcpy(Utilisateur_Connecte.texte, getMotDePasse());
 
+    Utilisateur_Connecte.type = 1;
+    Utilisateur_Connecte.expediteur = getpid();
+    Utilisateur_Connecte.requete = LOGIN;
+
     msgsnd(idQ, &Utilisateur_Connecte, sizeof(MESSAGE) - sizeof(long), 0);
+
+    loginOK();
+
 }
 
 void WindowClient::on_pushButtonLogout_clicked()
@@ -548,7 +553,7 @@ void WindowClient::on_checkBox2_clicked(bool checked)
 
     if (checked)
     {
-        ui->checkBox1->setText("Accepté");
+        ui->checkBox2->setText("Accepté");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(2));
@@ -557,7 +562,7 @@ void WindowClient::on_checkBox2_clicked(bool checked)
     }
     else
     {
-        ui->checkBox1->setText("Refusé");
+        ui->checkBox2->setText("Refusé");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(2));
@@ -573,7 +578,7 @@ void WindowClient::on_checkBox3_clicked(bool checked)
 
     if (checked)
     {
-        ui->checkBox1->setText("Accepté");
+        ui->checkBox3->setText("Accepté");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(3));
@@ -582,7 +587,7 @@ void WindowClient::on_checkBox3_clicked(bool checked)
     }
     else
     {
-        ui->checkBox1->setText("Refusé");
+        ui->checkBox3->setText("Refusé");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(3));
@@ -598,7 +603,7 @@ void WindowClient::on_checkBox4_clicked(bool checked)
 
     if (checked)
     {
-        ui->checkBox1->setText("Accepté");
+        ui->checkBox4->setText("Accepté");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(4));
@@ -607,7 +612,7 @@ void WindowClient::on_checkBox4_clicked(bool checked)
     }
     else
     {
-        ui->checkBox1->setText("Refusé");
+        ui->checkBox4->setText("Refusé");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(4));
@@ -623,7 +628,7 @@ void WindowClient::on_checkBox5_clicked(bool checked)
 
     if (checked)
     {
-        ui->checkBox1->setText("Accepté");
+        ui->checkBox5->setText("Accepté");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(5));
@@ -632,7 +637,7 @@ void WindowClient::on_checkBox5_clicked(bool checked)
     }
     else
     {
-        ui->checkBox1->setText("Refusé");
+        ui->checkBox5->setText("Refusé");
         Utilisateur_Accepte.type = 1;
         Utilisateur_Accepte.expediteur = getpid();
         strcpy(Utilisateur_Accepte.data1, w->getPersonneConnectee(5));
@@ -649,10 +654,8 @@ void handlerSIGUSR1(int sig)
     (void)sig;
     MESSAGE m;
     int i;
-    
-    int Reponse = msgrcv(idQ, &m, sizeof(MESSAGE) - sizeof(long), getpid(), IPC_NOWAIT);
 
-    while(Reponse != -1)
+    while(msgrcv(idQ,&m,sizeof(MESSAGE)-sizeof(long),getpid(),IPC_NOWAIT)!=-1)
     {
       switch(m.requete)
       {
@@ -671,7 +674,7 @@ void handlerSIGUSR1(int sig)
         case ADD_USER :
                     timeOut = TIME_OUT;
 
-                    for(i = 0; i < 6; i++)
+                    for(i = 1; i < 6; i++)
                     {
                       if((strcmp(w->getPersonneConnectee(i), "") == 0))
                       {
@@ -684,7 +687,7 @@ void handlerSIGUSR1(int sig)
         case REMOVE_USER :
                     timeOut = TIME_OUT;
 
-                    for(i = 0; i < 6; i++)
+                    for(i = 1; i < 6; i++)
                     {
                       if((strcmp(w->getPersonneConnectee(i), m.data1) == 0))
                       {
@@ -715,7 +718,7 @@ void handlerSIGUSR1(int sig)
                   }
                   break;
       }
-    }   
+    }  
 }
 
 void HandlerSIGUSR2(int sig)

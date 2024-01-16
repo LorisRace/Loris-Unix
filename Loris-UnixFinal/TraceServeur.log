@@ -1,0 +1,170 @@
+(SERVEUR 277500) Creation de la file de messages
+(SERVEUR 277500) Creation de la sémaphore
+(SERVEUR 277500) Creation de la mémoire partagée
+(SERVEUR 277500) Initialisation de la table des connexions
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(PUBLICITE 277502) Recuperation de l'id de la file de messages
+(PUBLICITE 277502) Recuperation de l'id de la mémoire partagée
+s1. 1343491
+s1. 0
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete CONNECT reçue de 277505
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+277505 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+277505 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+277505 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+277505 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete UPDATE_PUB reçue de 277502
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+277505 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete LOGIN reçue de 1 : --0--Loris--LRS--
+
+Connecte Cool
+
+Connecte Cool
+
+Connecte Cool
+Pid Serveur 1 : 277500
+Pid Serveur 2 : 0
+Pid Publicite : 0
+Pid Admin     : 0
+277505 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+     0 -                    -      0      0      0      0      0 -      0
+
+(SERVEUR 277500) Attente d'une requete...
+(SERVEUR 277500) Requete LOGIN reçue de 277500 : --OK--�--L'utilisateur est connecté--
