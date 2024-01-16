@@ -43,6 +43,6 @@ int main(int argc,char *argv[])
   
 
   // Deconnection de la BD
-  mysql_close(connexion);
+  //mysql_close(connexion);
   exit(0);
 }

@@ -89,12 +89,12 @@ int main()
   }
 
 
-  connexion = mysql_init(NULL);
+  /*connexion = mysql_init(NULL);
   if (mysql_real_connect(connexion,"localhost","Student","PassStudent1_","PourStudent",0,0,0) == NULL)
   {
     fprintf(stderr,"(SERVEUR) Erreur de connexion à la base de données...\n");
     exit(1);  
-  }
+  }*/
 
   // Initialisation du tableau de connexions
   fprintf(stderr,"(SERVEUR %d) Initialisation de la table des connexions\n",getpid());
@@ -157,7 +157,7 @@ int main()
                           i++;
                       }
 
-                      if (i >= 0 && i < 6)
+                      if (i < 6)
                       {
                         tab->connexions[i].pidFenetre = m.expediteur;
                       }
@@ -287,6 +287,7 @@ int main()
                         strcpy(reponse.texte, "L'utilisateur est connecté");
                         reponse.type = m.expediteur;
                         reponse.expediteur = getpid();
+                        printf("Connecte Cool");
                         reponse.requete = LOGIN;
                         msgsnd(idQ, &reponse, sizeof(MESSAGE) - sizeof(long), 0);
                         kill(m.expediteur, SIGUSR1);
@@ -619,22 +620,13 @@ void HandlerSigint(int sig)
 {
   (void)sig;
 
-  if(msgctl(idQ, IPC_RMID, NULL) == -1)
-  {
-    perror("Erreur au niveau de la suppression de la file de messages (1)");
-    exit(1);
-  }
+  msgctl(idQ, IPC_RMID, NULL);
+  shmctl(Id_Memoire_Partagee, IPC_RMID, NULL);
+    
   
   if(semctl(idSem, 0, IPC_RMID) == -1)
   {
     perror("Erreur au niveau de la suppression de la sémaphore (1)");
-    exit(1);
-    
-  }
-  
-  if(shmctl(Id_Memoire_Partagee, IPC_RMID, NULL) == -1)
-  {
-    perror("Erreur au niveau de la suppression de la mémoire partagée (1)");
     exit(1);
   }
 

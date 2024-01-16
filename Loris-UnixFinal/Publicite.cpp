@@ -83,5 +83,6 @@ int main()
 
 
   }
+  close(fd);
 }
 
