@@ -422,9 +422,7 @@ void WindowClient::on_pushButtonLogin_clicked()
     Utilisateur_Connecte.expediteur = getpid();
     Utilisateur_Connecte.requete = LOGIN;
 
-    msgsnd(idQ, &Utilisateur_Connecte, sizeof(MESSAGE) - sizeof(long), 0);
-
-    loginOK();
+    msgsnd(idQ, &Utilisateur_Connecte, sizeof(MESSAGE) - sizeof(long), 0);    
 
 }
 
@@ -513,7 +511,7 @@ void WindowClient::on_pushButtonModifier_clicked()
   m.expediteur = getpid();
   strcpy(m.data1, motDePasse);
   strcpy(m.data2, gsm);
-  strcpy(m.data2, email);
+  strcpy(m.texte, email);
   m.requete = MODIF2;
   msgsnd(idQ, &m, sizeof(MESSAGE) - sizeof(long), 0);
 }

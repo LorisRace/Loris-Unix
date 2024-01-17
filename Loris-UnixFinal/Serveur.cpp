@@ -507,6 +507,8 @@ int main()
                           execl("./Consultation", "Consultation", (char *)NULL);
                         }
 
+                        m.type = ProcessusConsultation;
+
                         msgsnd(idQ, &m, sizeof(MESSAGE) - sizeof(long), 0);
                         fprintf(stderr,"\nLe pid de ce processus est : %d\n", ProcessusConsultation);
 

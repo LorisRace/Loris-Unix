@@ -23,10 +23,11 @@ int main()
     {"En C++, une étape par semaine et c'est gagné !",4},
     {"Le Labo UNIX, c'est pas compliqué...",6},
     {"Loris aura son permis de conduire avant 2025",5},
-    {"Je vends une Fiat Multipla verte pour 800€", 4}
+    {"Je vends une Fiat Multipla verte pour 800€", 4},
+    {"Il a neigé le mercredi 17 janvier 2024, je l'ai vu", 5}
   };
 
-  for (int i=0 ; i<6 ; i++)
+  for (int i=0 ; i<7 ; i++)
   	if (write(fd,&pub[i],sizeof(PUBLICITE)) != sizeof(PUBLICITE))
   	{
   		perror("Erreur de write");
