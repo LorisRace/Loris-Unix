@@ -234,7 +234,6 @@ int main()
                         reponse.type = m.expediteur;
                         reponse.expediteur = getpid();
                         reponse.requete = LOGIN;
-                        fprintf(stderr,"\nNouveau Connecte Cool\n");
                         msgsnd(idQ, &reponse, sizeof(MESSAGE) - sizeof(long), 0);
                         kill(m.expediteur, SIGUSR1);
                         
@@ -288,11 +287,8 @@ int main()
                         strcpy(reponse.data1, "OK");
                         strcpy(reponse.texte, "L'utilisateur est connecté");
                         reponse.type = m.expediteur;
-                        fprintf(stderr,"\nConnecte Cool\n");
                         reponse.expediteur = getpid();
-                        fprintf(stderr,"\nConnecte Cool\n");
                         reponse.requete = LOGIN;
-                        fprintf(stderr,"\nConnecte Cool\n");
                         msgsnd(idQ, &reponse, sizeof(MESSAGE) - sizeof(long), 0);
                         kill(m.expediteur, SIGUSR1);
 
@@ -313,7 +309,7 @@ int main()
                             reponse.requete = ADD_USER;
                             strcpy(reponse.data1, m.data2);
                             msgsnd(idQ, &reponse, sizeof(MESSAGE) - sizeof(long), 0);
-                            //kill(tab->connexions[j].pidFenetre, SIGUSR1);
+                            kill(tab->connexions[j].pidFenetre, SIGUSR1);
 
                             reponse.type = m.expediteur;
                             strcpy(reponse.data1, tab->connexions[j].nom);
@@ -321,7 +317,7 @@ int main()
                           }
                         }
 
-                        //kill(m.expediteur, SIGUSR1);
+                        kill(m.expediteur, SIGUSR1);
                         break;
                       }
 
